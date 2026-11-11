@@ -2,82 +2,173 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#111827">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Premier League Highlights Tracker</title>
   <link rel="manifest" href="manifest.json">
   <style>
-    :root { color-scheme: dark; --bg:#0b1220; --panel:#151f30; --muted:#9aa8ba; --line:#29364a; --accent:#42d392; }
-    * { box-sizing:border-box }
-    body { margin:0; padding:24px 16px 48px; background:var(--bg); color:#f4f7fb; font:16px/1.45 system-ui,-apple-system,sans-serif; }
-    main { max-width:680px; margin:auto }
-    h1 { font-size:26px; margin:0 0 6px }
-    .sub,.muted { color:var(--muted) }
-    .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:22px 0 }
-    .stat,.panel { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:14px }
-    .stat strong { display:block; font-size:22px }
-    .stat span { color:var(--muted); font-size:12px }
-    .progress { height:9px; background:#263247; border-radius:99px; overflow:hidden; margin-top:10px }
-    .progress > div { height:100%; width:0; background:var(--accent); transition:width .2s }
-    .sectionhead { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:22px 0 10px }
-    .sectionhead h2 { font-size:18px; margin:0 }
-    .match { display:flex; align-items:center; gap:12px; padding:14px 4px; border-bottom:1px solid var(--line); cursor:pointer }
-    .match:last-child { border-bottom:0 }
-    .check { font-size:23px; width:28px; color:var(--muted); flex:none }
-    .match.watched .check { color:var(--accent) }
-    .teams { flex:1; font-weight:600 }
-    .date { display:block; color:var(--muted); font-size:12px; font-weight:400 }
-    .empty { padding:22px 4px; color:var(--muted) }
-    button { background:#26364d; color:#fff; border:1px solid #40516a; border-radius:9px; padding:9px 12px; font:inherit }
-    .note { font-size:13px; color:var(--muted); margin-top:18px }
-    @media(max-width:420px) { .stats { gap:6px } .stat { padding:10px } .stat strong { font-size:19px } }
+    :root{color-scheme:dark;--bg:#08111f;--panel:#111d2d;--panel2:#17253a;--muted:#91a1b6;--line:#26364d;--green:#43d49a;--white:#f5f8fc}
+    *{box-sizing:border-box}
+    body{margin:0;padding:calc(24px + env(safe-area-inset-top)) 16px calc(36px + env(safe-area-inset-bottom));background:radial-gradient(ellipse at top,#14243a 0,#08111f 55%);color:var(--white);font:16px/1.45 system-ui,-apple-system,BlinkMacSystemFont,sans-serif}
+    main{max-width:660px;margin:auto}
+    header{margin-bottom:22px}
+    h1{font-size:27px;letter-spacing:-.6px;margin:0 0 3px}
+    .subtitle,.muted{color:var(--muted)}
+    .eyebrow{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);font-weight:800;margin-bottom:6px}
+    .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:20px 0 14px}
+    .stat,.panel{background:rgba(17,29,45,.94);border:1px solid var(--line);border-radius:17px}
+    .stat{padding:13px 11px}
+    .stat strong{display:block;font-size:23px;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+    .stat span{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+    .panel{padding:16px;margin-top:12px}
+    .progress-head{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px;font-weight:700}
+    .progress-head small{font-weight:500;color:var(--muted)}
+    .track{height:8px;background:#26364d;border-radius:99px;overflow:hidden;margin-top:10px}
+    .fill{height:100%;width:0;background:linear-gradient(90deg,#29b982,#72e5b6);border-radius:99px;transition:width .2s}
+    .section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:25px 2px 8px}
+    h2{font-size:18px;margin:0}
+    button{background:#1b2b41;color:var(--white);border:1px solid #40536d;border-radius:10px;padding:8px 11px;font:inherit;font-size:13px;font-weight:650}
+    .match{display:flex;align-items:center;gap:12px;padding:14px 1px;border-bottom:1px solid var(--line);cursor:pointer; -webkit-tap-highlight-color:transparent}
+    .match:last-child{border-bottom:0}
+    .match:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:8px}
+    .check{width:29px;flex:none;text-align:center;font-size:25px;line-height:1;color:#8b9bb0}
+    .match.watched .check{color:var(--green)}
+    .teams{flex:1;font-size:15px;font-weight:700}
+    .date{display:block;color:var(--muted);font-size:12px;font-weight:450;margin-top:2px}
+    .status{font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);background:#1b2b41;border-radius:6px;padding:4px 6px}
+    .match.watched .status{color:#8be8bf}
+    .empty{padding:20px 4px;color:var(--muted);font-size:14px}
+    .foot{font-size:12px;color:var(--muted);margin:17px 3px 0}
+    .error{color:#ffc0a8}
+    .loading{display:flex;align-items:center;gap:10px;color:var(--muted);padding:18px 2px}
+    @media(max-width:390px){.stats{gap:6px}.stat{padding:11px 8px}.stat strong{font-size:20px}.stat span{font-size:10px}.teams{font-size:14px}}
   </style>
 </head>
 <body>
 <main>
-  <h1>Premier League Tracker</h1>
-  <div class="sub">Your match highlights checklist</div>
-  <section class="stats" aria-label="Progress">
-    <div class="stat"><strong id="weekCount">0/0</strong><span>This matchweek</span></div>
-    <div class="stat"><strong id="seasonCount">0/380</strong><span>Season watched</span></div>
-    <div class="stat"><strong id="totalCount">0</strong><span>Total watched</span></div>
+  <header>
+    <div class="eyebrow">Your matchday checklist</div>
+    <h1>Premier League Tracker</h1>
+    <div class="subtitle">Watch the highlights. Tick them off. Keep your season on track.</div>
+  </header>
+
+  <section class="stats" aria-label="Watching totals">
+    <div class="stat"><strong id="weekCount">—</strong><span>This matchweek</span></div>
+    <div class="stat"><strong id="seasonCount">—</strong><span>This season</span></div>
+    <div class="stat"><strong id="totalCount">—</strong><span>Total watched</span></div>
   </section>
-  <div class="panel">
-    <div><strong id="weekLabel">Current matchweek</strong><span class="muted" id="remaining"> · 0 remaining</span></div>
-    <div class="progress"><div id="weekBar"></div></div>
+
+  <section class="panel">
+    <div class="progress-head"><span id="weekLabel">Current matchweek</span><small id="remaining">Loading…</small></div>
+    <div class="track"><div class="fill" id="weekBar"></div></div>
+  </section>
+  <section class="panel">
+    <div class="progress-head"><span>Season progress</span><small id="seasonPercent">—</small></div>
+    <div class="track"><div class="fill" id="seasonBar"></div></div>
+  </section>
+
+  <div class="section-head">
+    <h2 id="fixturesHeading">Fixtures</h2>
+    <button id="resetWeek" type="button">Reset this week</button>
   </div>
-  <div class="sectionhead"><h2>Fixtures</h2><button id="resetWeek" type="button">Reset week</button></div>
-  <div class="panel" id="matches"><div class="empty">Fixture feed will be connected in the next setup step.</div></div>
-  <p class="note">Your checkmarks are saved on this device. Automatic live fixtures and season syncing still need to be connected before the tracker is complete.</p>
+  <section class="panel" id="matches" aria-live="polite">
+    <div class="loading">Loading Premier League fixtures…</div>
+  </section>
+  <p class="foot" id="updated"></p>
+  <p class="foot">Checkmarks are saved in this browser on this device.</p>
 </main>
 <script>
-  // Starter shell: match data will be supplied by the secure fixture feed.
+(() => {
+  "use strict";
   const STORAGE_KEY = "pl-highlights-watched-v1";
-  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-  const matches = []; // Populated when the fixture feed is connected.
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}") || {}; } catch (_) { saved = {}; }
+  let seasonMatches = [];
+  let currentMatches = [];
+  const terminal = new Set(["FINISHED","POSTPONED","CANCELLED"]);
+  const byId = id => document.getElementById(id);
+  const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+  function formatDate(value) {
+    if (!value) return "";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "";
+    return date.toLocaleString(undefined,{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
+  }
+  function chooseMatchday(matches) {
+    const active = matches.filter(m => !terminal.has(m.status));
+    const live = active.find(m => ["LIVE","IN_PLAY","PAUSED"].includes(m.status));
+    if (live) return live.matchday;
+    active.sort((a,b) => new Date(a.utcDate) - new Date(b.utcDate));
+    if (active.length) return active[0].matchday;
+    return Math.max(...matches.map(m => m.matchday));
+  }
   function render() {
-    const watched = matches.filter(m => saved[m.id]).length;
-    const remaining = matches.length - watched;
-    document.getElementById("weekCount").textContent = `${watched}/${matches.length}`;
-    document.getElementById("seasonCount").textContent = `${Object.keys(saved).filter(k => saved[k]).length}/380`;
-    document.getElementById("totalCount").textContent = Object.keys(saved).filter(k => saved[k]).length;
-    document.getElementById("remaining").textContent = ` · ${remaining} remaining`;
-    document.getElementById("weekBar").style.width = matches.length ? `${watched/matches.length*100}%` : "0%";
-    document.getElementById("matches").innerHTML = matches.length ? "" : '<div class="empty">Fixtures will appear here once the live fixture feed is connected.</div>';
-    matches.forEach(m => {
+    const weekWatched = currentMatches.filter(m => !!saved[m.id]).length;
+    const seasonWatched = seasonMatches.filter(m => !!saved[m.id]).length;
+    const totalWatched = Object.values(saved).filter(Boolean).length;
+    const weekTotal = currentMatches.length;
+    const seasonTotal = seasonMatches.length;
+    const weekRemaining = weekTotal - weekWatched;
+    byId("weekCount").textContent = weekWatched + "/" + weekTotal;
+    byId("seasonCount").textContent = seasonWatched + "/" + seasonTotal;
+    byId("totalCount").textContent = totalWatched;
+    byId("remaining").textContent = weekRemaining + " remaining";
+    byId("weekBar").style.width = (weekTotal ? weekWatched/weekTotal*100 : 0) + "%";
+    byId("seasonBar").style.width = (seasonTotal ? seasonWatched/seasonTotal*100 : 0) + "%";
+    byId("seasonPercent").textContent = (seasonTotal ? Math.round(seasonWatched/seasonTotal*100) : 0) + "%";
+    byId("fixturesHeading").textContent = "Matchweek " + (currentMatches[0]?.matchday ?? "—");
+    const list = byId("matches");
+    list.replaceChildren();
+    if (!currentMatches.length) {
+      list.innerHTML = '<div class="empty">No fixtures are available for the current matchweek yet.</div>';
+      return;
+    }
+    currentMatches.forEach(match => {
+      const isWatched = !!saved[match.id];
       const row = document.createElement("div");
-      row.className = "match" + (saved[m.id] ? " watched" : "");
-      row.innerHTML = `<span class="check">${saved[m.id] ? "☑" : "◯"}</span><span class="teams">${m.home} vs ${m.away}<span class="date">${m.date || ""}</span></span>`;
-      row.addEventListener("click", () => { saved[m.id] = !saved[m.id]; localStorage.setItem(STORAGE_KEY, JSON.stringify(saved)); render(); });
-      document.getElementById("matches").appendChild(row);
+      row.className = "match" + (isWatched ? " watched" : "");
+      row.tabIndex = 0;
+      row.setAttribute("role","checkbox");
+      row.setAttribute("aria-checked",String(isWatched));
+      row.setAttribute("aria-label",match.home + " vs " + match.away + (isWatched ? ", watched" : ", not watched"));
+      row.innerHTML = '<span class="check" aria-hidden="true">' + (isWatched ? "☑" : "◯") + '</span><span class="teams">' + esc(match.home) + ' vs ' + esc(match.away) + '<span class="date">' + esc(formatDate(match.utcDate)) + '</span></span><span class="status">' + (isWatched ? "Watched" : esc((match.status || "Scheduled").replaceAll("_"," "))) + '</span>';
+      const toggle = () => {
+        if (saved[match.id]) delete saved[match.id]; else saved[match.id] = true;
+        localStorage.setItem(STORAGE_KEY,JSON.stringify(saved));
+        render();
+      };
+      row.addEventListener("click",toggle);
+      row.addEventListener("keydown",event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); toggle(); } });
+      list.appendChild(row);
     });
   }
-  document.getElementById("resetWeek").addEventListener("click", () => {
-    matches.forEach(m => delete saved[m.id]);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(saved)); render();
+  byId("resetWeek").addEventListener("click",() => {
+    currentMatches.forEach(match => delete saved[match.id]);
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(saved));
+    render();
   });
-  render();
-  if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+  async function load() {
+    try {
+      const response = await fetch("./fixtures.json?ts=" + Date.now(),{cache:"no-store"});
+      if (!response.ok) throw new Error("Fixture feed not published yet (" + response.status + ").");
+      const data = await response.json();
+      seasonMatches = Array.isArray(data.matches) ? data.matches : [];
+      if (!seasonMatches.length) throw new Error("The fixture feed is empty.");
+      const matchday = chooseMatchday(seasonMatches);
+      currentMatches = seasonMatches.filter(m => m.matchday === matchday).sort((a,b) => new Date(a.utcDate)-new Date(b.utcDate));
+      byId("weekLabel").textContent = "Matchweek " + matchday;
+      byId("updated").textContent = data.generatedAt ? "Fixtures refreshed " + new Date(data.generatedAt).toLocaleString() : "";
+      render();
+    } catch (error) {
+      byId("matches").innerHTML = '<div class="empty error">' + esc(error.message) + '<br><br>The automatic fixture feed still needs its API token configured.</div>';
+      byId("remaining").textContent = "Not loaded";
+    }
+  }
+  load();
+  if ("serviceWorker" in navigator) window.addEventListener("load",() => navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+})();
 </script>
 </body>
 </html>
