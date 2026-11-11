@@ -27,7 +27,9 @@
     .progress-head small{font-weight:500;color:var(--muted)}
     .track{height:8px;background:#26364d;border-radius:99px;overflow:hidden;margin-top:10px}
     .fill{height:100%;width:0;background:linear-gradient(90deg,#29b982,#72e5b6);border-radius:99px;transition:width .2s}
-    .section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:25px 2px 8px}
+    .section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:25px 2px 8px;flex-wrap:wrap}
+    .week-nav{display:flex;align-items:center;gap:7px}
+    .week-nav button{padding:8px 10px}
     h2{font-size:18px;margin:0}
     button{background:#1b2b41;color:var(--white);border:1px solid #40536d;border-radius:10px;padding:8px 11px;font:inherit;font-size:13px;font-weight:650}
     .match{display:flex;align-items:center;gap:12px;padding:14px 1px;border-bottom:1px solid var(--line);cursor:pointer; -webkit-tap-highlight-color:transparent}
@@ -70,7 +72,11 @@
   </section>
 
   <div class="section-head">
-    <h2 id="fixturesHeading">Fixtures</h2>
+    <div class="week-nav">
+      <button id="previousWeek" type="button" aria-label="Previous matchweek">‹</button>
+      <h2 id="fixturesHeading">Matchweek —</h2>
+      <button id="nextWeek" type="button" aria-label="Next matchweek">›</button>
+    </div>
     <button id="resetWeek" type="button">Reset this week</button>
   </div>
   <section class="panel" id="matches" aria-live="polite">
@@ -88,6 +94,8 @@
   try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}") || {}; } catch (_) { saved = {}; }
   let seasonMatches = [];
   let currentMatches = [];
+  let selectedMatchday = null;
+  let availableMatchdays = [];
   const terminal = new Set(["FINISHED","POSTPONED","CANCELLED"]);
   const byId = id => document.getElementById(id);
   const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
@@ -119,7 +127,10 @@
     byId("weekBar").style.width = (weekTotal ? weekWatched/weekTotal*100 : 0) + "%";
     byId("seasonBar").style.width = (seasonTotal ? seasonWatched/seasonTotal*100 : 0) + "%";
     byId("seasonPercent").textContent = (seasonTotal ? Math.round(seasonWatched/seasonTotal*100) : 0) + "%";
-    byId("fixturesHeading").textContent = "Matchweek " + (currentMatches[0]?.matchday ?? "—");
+    byId("fixturesHeading").textContent = "Matchweek " + (selectedMatchday ?? "—");
+    byId("weekLabel").textContent = "Matchweek " + (selectedMatchday ?? "—");
+    byId("previousWeek").disabled = !availableMatchdays.length || selectedMatchday === availableMatchdays[0];
+    byId("nextWeek").disabled = !availableMatchdays.length || selectedMatchday === availableMatchdays[availableMatchdays.length - 1];
     const list = byId("matches");
     list.replaceChildren();
     if (!currentMatches.length) {
@@ -145,6 +156,19 @@
       list.appendChild(row);
     });
   }
+  function showMatchday(matchday) {
+    selectedMatchday = matchday;
+    currentMatches = seasonMatches.filter(m => m.matchday === selectedMatchday).sort((a,b) => new Date(a.utcDate)-new Date(b.utcDate));
+    render();
+  }
+  byId("previousWeek").addEventListener("click",() => {
+    const index = availableMatchdays.indexOf(selectedMatchday);
+    if (index > 0) showMatchday(availableMatchdays[index - 1]);
+  });
+  byId("nextWeek").addEventListener("click",() => {
+    const index = availableMatchdays.indexOf(selectedMatchday);
+    if (index >= 0 && index < availableMatchdays.length - 1) showMatchday(availableMatchdays[index + 1]);
+  });
   byId("resetWeek").addEventListener("click",() => {
     currentMatches.forEach(match => delete saved[match.id]);
     localStorage.setItem(STORAGE_KEY,JSON.stringify(saved));
@@ -157,7 +181,9 @@
       const data = await response.json();
       seasonMatches = Array.isArray(data.matches) ? data.matches : [];
       if (!seasonMatches.length) throw new Error("The fixture feed is empty.");
+      availableMatchdays = [...new Set(seasonMatches.map(m => m.matchday))].sort((a,b) => a-b);
       const matchday = chooseMatchday(seasonMatches);
+      selectedMatchday = matchday;
       currentMatches = seasonMatches.filter(m => m.matchday === matchday).sort((a,b) => new Date(a.utcDate)-new Date(b.utcDate));
       byId("weekLabel").textContent = "Matchweek " + matchday;
       byId("updated").textContent = data.generatedAt ? "Fixtures refreshed " + new Date(data.generatedAt).toLocaleString() : "";
