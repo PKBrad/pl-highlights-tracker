@@ -2,6 +2,10 @@ name: Update Premier League fixtures
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/update-fixtures.yml"
+      - "scripts/update_fixtures.py"
   schedule:
     - cron: "17 */6 * * *"
 
