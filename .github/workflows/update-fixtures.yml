@@ -25,12 +25,12 @@ jobs:
         run: python scripts/update_fixtures.py
       - name: Commit updated fixtures
         run: |
-          if git diff --quiet -- fixtures.json; then
+          git add fixtures.json
+          if git diff --cached --quiet; then
             echo "Fixtures are already up to date."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add fixtures.json
           git commit -m "Update Premier League fixtures"
           git push
