@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <title>Premier League Highlights Tracker</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    :root { color-scheme: dark; --bg:#0b1220; --panel:#151f30; --muted:#9aa8ba; --line:#29364a; --accent:#42d392; }
+    * { box-sizing:border-box }
+    body { margin:0; padding:24px 16px 48px; background:var(--bg); color:#f4f7fb; font:16px/1.45 system-ui,-apple-system,sans-serif; }
+    main { max-width:680px; margin:auto }
+    h1 { font-size:26px; margin:0 0 6px }
+    .sub,.muted { color:var(--muted) }
+    .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:22px 0 }
+    .stat,.panel { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:14px }
+    .stat strong { display:block; font-size:22px }
+    .stat span { color:var(--muted); font-size:12px }
+    .progress { height:9px; background:#263247; border-radius:99px; overflow:hidden; margin-top:10px }
+    .progress > div { height:100%; width:0; background:var(--accent); transition:width .2s }
+    .sectionhead { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:22px 0 10px }
+    .sectionhead h2 { font-size:18px; margin:0 }
+    .match { display:flex; align-items:center; gap:12px; padding:14px 4px; border-bottom:1px solid var(--line); cursor:pointer }
+    .match:last-child { border-bottom:0 }
+    .check { font-size:23px; width:28px; color:var(--muted); flex:none }
+    .match.watched .check { color:var(--accent) }
+    .teams { flex:1; font-weight:600 }
+    .date { display:block; color:var(--muted); font-size:12px; font-weight:400 }
+    .empty { padding:22px 4px; color:var(--muted) }
+    button { background:#26364d; color:#fff; border:1px solid #40516a; border-radius:9px; padding:9px 12px; font:inherit }
+    .note { font-size:13px; color:var(--muted); margin-top:18px }
+    @media(max-width:420px) { .stats { gap:6px } .stat { padding:10px } .stat strong { font-size:19px } }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Premier League Tracker</h1>
+  <div class="sub">Your match highlights checklist</div>
+  <section class="stats" aria-label="Progress">
+    <div class="stat"><strong id="weekCount">0/0</strong><span>This matchweek</span></div>
+    <div class="stat"><strong id="seasonCount">0/380</strong><span>Season watched</span></div>
+    <div class="stat"><strong id="totalCount">0</strong><span>Total watched</span></div>
+  </section>
+  <div class="panel">
+    <div><strong id="weekLabel">Current matchweek</strong><span class="muted" id="remaining"> · 0 remaining</span></div>
+    <div class="progress"><div id="weekBar"></div></div>
+  </div>
+  <div class="sectionhead"><h2>Fixtures</h2><button id="resetWeek" type="button">Reset week</button></div>
+  <div class="panel" id="matches"><div class="empty">Fixture feed will be connected in the next setup step.</div></div>
+  <p class="note">Your checkmarks are saved on this device. Automatic live fixtures and season syncing still need to be connected before the tracker is complete.</p>
+</main>
+<script>
+  // Starter shell: match data will be supplied by the secure fixture feed.
+  const STORAGE_KEY = "pl-highlights-watched-v1";
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+  const matches = []; // Populated when the fixture feed is connected.
+  function render() {
+    const watched = matches.filter(m => saved[m.id]).length;
+    const remaining = matches.length - watched;
+    document.getElementById("weekCount").textContent = `${watched}/${matches.length}`;
+    document.getElementById("seasonCount").textContent = `${Object.keys(saved).filter(k => saved[k]).length}/380`;
+    document.getElementById("totalCount").textContent = Object.keys(saved).filter(k => saved[k]).length;
+    document.getElementById("remaining").textContent = ` · ${remaining} remaining`;
+    document.getElementById("weekBar").style.width = matches.length ? `${watched/matches.length*100}%` : "0%";
+    document.getElementById("matches").innerHTML = matches.length ? "" : '<div class="empty">Fixtures will appear here once the live fixture feed is connected.</div>';
+    matches.forEach(m => {
+      const row = document.createElement("div");
+      row.className = "match" + (saved[m.id] ? " watched" : "");
+      row.innerHTML = `<span class="check">${saved[m.id] ? "☑" : "◯"}</span><span class="teams">${m.home} vs ${m.away}<span class="date">${m.date || ""}</span></span>`;
+      row.addEventListener("click", () => { saved[m.id] = !saved[m.id]; localStorage.setItem(STORAGE_KEY, JSON.stringify(saved)); render(); });
+      document.getElementById("matches").appendChild(row);
+    });
+  }
+  document.getElementById("resetWeek").addEventListener("click", () => {
+    matches.forEach(m => delete saved[m.id]);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(saved)); render();
+  });
+  render();
+  if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+</script>
+</body>
+</html>
