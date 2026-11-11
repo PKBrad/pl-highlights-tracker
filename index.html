@@ -90,6 +90,7 @@
 (() => {
   "use strict";
   const STORAGE_KEY = "pl-highlights-watched-v1";
+  const SELECTED_WEEK_KEY = "pl-highlights-selected-week-v1";
   let saved = {};
   try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}") || {}; } catch (_) { saved = {}; }
   let seasonMatches = [];
@@ -158,6 +159,7 @@
   }
   function showMatchday(matchday) {
     selectedMatchday = matchday;
+    localStorage.setItem(SELECTED_WEEK_KEY,String(matchday));
     currentMatches = seasonMatches.filter(m => m.matchday === selectedMatchday).sort((a,b) => new Date(a.utcDate)-new Date(b.utcDate));
     render();
   }
@@ -182,7 +184,12 @@
       seasonMatches = Array.isArray(data.matches) ? data.matches : [];
       if (!seasonMatches.length) throw new Error("The fixture feed is empty.");
       availableMatchdays = [...new Set(seasonMatches.map(m => m.matchday))].sort((a,b) => a-b);
-      const matchday = chooseMatchday(seasonMatches);
+      const currentMatchday = chooseMatchday(seasonMatches);
+      let matchday = currentMatchday;
+      try {
+        const savedMatchday = Number(localStorage.getItem(SELECTED_WEEK_KEY));
+        if (availableMatchdays.includes(savedMatchday)) matchday = savedMatchday;
+      } catch (_) {}
       selectedMatchday = matchday;
       currentMatches = seasonMatches.filter(m => m.matchday === matchday).sort((a,b) => new Date(a.utcDate)-new Date(b.utcDate));
       byId("weekLabel").textContent = "Matchweek " + matchday;
