@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "competition": "Premier League",
-  "generatedAt": "2026-11-19T07:37:03.927254+00:00",
+  "generatedAt": "2026-11-19T20:46:48.867306+00:00",
   "matches": [
     {
       "id": "560542",
@@ -1804,13 +1804,13 @@
       "away": "Newcastle"
     },
     {
-      "id": "560742",
+      "id": "560748",
       "matchday": 21,
-      "utcDate": "2027-01-16T15:00:00Z",
-      "date": "2027-01-16T15:00:00Z",
+      "utcDate": "2027-01-16T12:30:00Z",
+      "date": "2027-01-16T12:30:00Z",
       "status": "TIMED",
-      "home": "Bournemouth",
-      "away": "Ipswich Town"
+      "home": "Coventry City",
+      "away": "Everton"
     },
     {
       "id": "560743",
@@ -1829,42 +1829,6 @@
       "status": "TIMED",
       "home": "Chelsea",
       "away": "Sunderland"
-    },
-    {
-      "id": "560745",
-      "matchday": 21,
-      "utcDate": "2027-01-16T15:00:00Z",
-      "date": "2027-01-16T15:00:00Z",
-      "status": "TIMED",
-      "home": "Brentford",
-      "away": "Brighton Hove"
-    },
-    {
-      "id": "560746",
-      "matchday": 21,
-      "utcDate": "2027-01-16T15:00:00Z",
-      "date": "2027-01-16T15:00:00Z",
-      "status": "TIMED",
-      "home": "Aston Villa",
-      "away": "Man United"
-    },
-    {
-      "id": "560747",
-      "matchday": 21,
-      "utcDate": "2027-01-16T15:00:00Z",
-      "date": "2027-01-16T15:00:00Z",
-      "status": "TIMED",
-      "home": "Tottenham",
-      "away": "Leeds United"
-    },
-    {
-      "id": "560748",
-      "matchday": 21,
-      "utcDate": "2027-01-16T15:00:00Z",
-      "date": "2027-01-16T15:00:00Z",
-      "status": "TIMED",
-      "home": "Coventry City",
-      "away": "Everton"
     },
     {
       "id": "560749",
@@ -1894,6 +1858,42 @@
       "away": "Fulham"
     },
     {
+      "id": "560746",
+      "matchday": 21,
+      "utcDate": "2027-01-16T17:30:00Z",
+      "date": "2027-01-16T17:30:00Z",
+      "status": "TIMED",
+      "home": "Aston Villa",
+      "away": "Man United"
+    },
+    {
+      "id": "560742",
+      "matchday": 21,
+      "utcDate": "2027-01-17T14:00:00Z",
+      "date": "2027-01-17T14:00:00Z",
+      "status": "TIMED",
+      "home": "Bournemouth",
+      "away": "Ipswich Town"
+    },
+    {
+      "id": "560747",
+      "matchday": 21,
+      "utcDate": "2027-01-17T16:30:00Z",
+      "date": "2027-01-17T16:30:00Z",
+      "status": "TIMED",
+      "home": "Tottenham",
+      "away": "Leeds United"
+    },
+    {
+      "id": "560745",
+      "matchday": 21,
+      "utcDate": "2027-01-18T20:00:00Z",
+      "date": "2027-01-18T20:00:00Z",
+      "status": "TIMED",
+      "home": "Brentford",
+      "away": "Brighton Hove"
+    },
+    {
       "id": "560752",
       "matchday": 22,
       "utcDate": "2027-01-23T15:00:00Z",
@@ -1901,51 +1901,6 @@
       "status": "TIMED",
       "home": "Ipswich Town",
       "away": "Hull City"
-    },
-    {
-      "id": "560753",
-      "matchday": 22,
-      "utcDate": "2027-01-23T15:00:00Z",
-      "date": "2027-01-23T15:00:00Z",
-      "status": "TIMED",
-      "home": "Everton",
-      "away": "Brentford"
-    },
-    {
-      "id": "560754",
-      "matchday": 22,
-      "utcDate": "2027-01-23T15:00:00Z",
-      "date": "2027-01-23T15:00:00Z",
-      "status": "TIMED",
-      "home": "Sunderland",
-      "away": "Coventry City"
-    },
-    {
-      "id": "560755",
-      "matchday": 22,
-      "utcDate": "2027-01-23T15:00:00Z",
-      "date": "2027-01-23T15:00:00Z",
-      "status": "TIMED",
-      "home": "Nottingham",
-      "away": "Bournemouth"
-    },
-    {
-      "id": "560756",
-      "matchday": 22,
-      "utcDate": "2027-01-23T15:00:00Z",
-      "date": "2027-01-23T15:00:00Z",
-      "status": "TIMED",
-      "home": "Arsenal",
-      "away": "Newcastle"
-    },
-    {
-      "id": "560757",
-      "matchday": 22,
-      "utcDate": "2027-01-23T15:00:00Z",
-      "date": "2027-01-23T15:00:00Z",
-      "status": "TIMED",
-      "home": "Leeds United",
-      "away": "Chelsea"
     },
     {
       "id": "560758",
@@ -1957,49 +1912,85 @@
       "away": "Aston Villa"
     },
     {
-      "id": "560759",
+      "id": "560756",
       "matchday": 22,
-      "utcDate": "2027-01-23T15:00:00Z",
-      "date": "2027-01-23T15:00:00Z",
+      "utcDate": "2027-01-23T17:30:00Z",
+      "date": "2027-01-23T17:30:00Z",
       "status": "TIMED",
-      "home": "Man United",
-      "away": "Liverpool"
+      "home": "Arsenal",
+      "away": "Newcastle"
     },
     {
       "id": "560760",
       "matchday": 22,
-      "utcDate": "2027-01-23T15:00:00Z",
-      "date": "2027-01-23T15:00:00Z",
+      "utcDate": "2027-01-23T20:00:00Z",
+      "date": "2027-01-23T20:00:00Z",
       "status": "TIMED",
       "home": "Brighton Hove",
       "away": "Man City"
     },
     {
+      "id": "560753",
+      "matchday": 22,
+      "utcDate": "2027-01-24T14:00:00Z",
+      "date": "2027-01-24T14:00:00Z",
+      "status": "TIMED",
+      "home": "Everton",
+      "away": "Brentford"
+    },
+    {
+      "id": "560754",
+      "matchday": 22,
+      "utcDate": "2027-01-24T14:00:00Z",
+      "date": "2027-01-24T14:00:00Z",
+      "status": "TIMED",
+      "home": "Sunderland",
+      "away": "Coventry City"
+    },
+    {
+      "id": "560755",
+      "matchday": 22,
+      "utcDate": "2027-01-24T14:00:00Z",
+      "date": "2027-01-24T14:00:00Z",
+      "status": "TIMED",
+      "home": "Nottingham",
+      "away": "Bournemouth"
+    },
+    {
       "id": "560761",
       "matchday": 22,
-      "utcDate": "2027-01-23T15:00:00Z",
-      "date": "2027-01-23T15:00:00Z",
+      "utcDate": "2027-01-24T14:00:00Z",
+      "date": "2027-01-24T14:00:00Z",
       "status": "TIMED",
       "home": "Crystal Palace",
       "away": "Tottenham"
     },
     {
-      "id": "560762",
-      "matchday": 23,
-      "utcDate": "2027-01-30T15:00:00Z",
-      "date": "2027-01-30T15:00:00Z",
+      "id": "560759",
+      "matchday": 22,
+      "utcDate": "2027-01-24T16:30:00Z",
+      "date": "2027-01-24T16:30:00Z",
       "status": "TIMED",
-      "home": "Tottenham",
-      "away": "Sunderland"
+      "home": "Man United",
+      "away": "Liverpool"
     },
     {
-      "id": "560763",
-      "matchday": 23,
-      "utcDate": "2027-01-30T15:00:00Z",
-      "date": "2027-01-30T15:00:00Z",
+      "id": "560757",
+      "matchday": 22,
+      "utcDate": "2027-01-25T20:00:00Z",
+      "date": "2027-01-25T20:00:00Z",
       "status": "TIMED",
-      "home": "Brentford",
-      "away": "Man United"
+      "home": "Leeds United",
+      "away": "Chelsea"
+    },
+    {
+      "id": "560769",
+      "matchday": 23,
+      "utcDate": "2027-01-30T12:30:00Z",
+      "date": "2027-01-30T12:30:00Z",
+      "status": "TIMED",
+      "home": "Liverpool",
+      "away": "Everton"
     },
     {
       "id": "560764",
@@ -2011,60 +2002,6 @@
       "away": "Brighton Hove"
     },
     {
-      "id": "560765",
-      "matchday": 23,
-      "utcDate": "2027-01-30T15:00:00Z",
-      "date": "2027-01-30T15:00:00Z",
-      "status": "TIMED",
-      "home": "Hull City",
-      "away": "Crystal Palace"
-    },
-    {
-      "id": "560766",
-      "matchday": 23,
-      "utcDate": "2027-01-30T15:00:00Z",
-      "date": "2027-01-30T15:00:00Z",
-      "status": "TIMED",
-      "home": "Coventry City",
-      "away": "Leeds United"
-    },
-    {
-      "id": "560767",
-      "matchday": 23,
-      "utcDate": "2027-01-30T15:00:00Z",
-      "date": "2027-01-30T15:00:00Z",
-      "status": "TIMED",
-      "home": "Bournemouth",
-      "away": "Fulham"
-    },
-    {
-      "id": "560768",
-      "matchday": 23,
-      "utcDate": "2027-01-30T15:00:00Z",
-      "date": "2027-01-30T15:00:00Z",
-      "status": "TIMED",
-      "home": "Chelsea",
-      "away": "Nottingham"
-    },
-    {
-      "id": "560769",
-      "matchday": 23,
-      "utcDate": "2027-01-30T15:00:00Z",
-      "date": "2027-01-30T15:00:00Z",
-      "status": "TIMED",
-      "home": "Liverpool",
-      "away": "Everton"
-    },
-    {
-      "id": "560770",
-      "matchday": 23,
-      "utcDate": "2027-01-30T15:00:00Z",
-      "date": "2027-01-30T15:00:00Z",
-      "status": "TIMED",
-      "home": "Man City",
-      "away": "Arsenal"
-    },
-    {
       "id": "560771",
       "matchday": 23,
       "utcDate": "2027-01-30T15:00:00Z",
@@ -2072,6 +2009,69 @@
       "status": "TIMED",
       "home": "Aston Villa",
       "away": "Ipswich Town"
+    },
+    {
+      "id": "560768",
+      "matchday": 23,
+      "utcDate": "2027-01-30T17:30:00Z",
+      "date": "2027-01-30T17:30:00Z",
+      "status": "TIMED",
+      "home": "Chelsea",
+      "away": "Nottingham"
+    },
+    {
+      "id": "560762",
+      "matchday": 23,
+      "utcDate": "2027-01-31T14:00:00Z",
+      "date": "2027-01-31T14:00:00Z",
+      "status": "TIMED",
+      "home": "Tottenham",
+      "away": "Sunderland"
+    },
+    {
+      "id": "560765",
+      "matchday": 23,
+      "utcDate": "2027-01-31T14:00:00Z",
+      "date": "2027-01-31T14:00:00Z",
+      "status": "TIMED",
+      "home": "Hull City",
+      "away": "Crystal Palace"
+    },
+    {
+      "id": "560766",
+      "matchday": 23,
+      "utcDate": "2027-01-31T14:00:00Z",
+      "date": "2027-01-31T14:00:00Z",
+      "status": "TIMED",
+      "home": "Coventry City",
+      "away": "Leeds United"
+    },
+    {
+      "id": "560767",
+      "matchday": 23,
+      "utcDate": "2027-01-31T14:00:00Z",
+      "date": "2027-01-31T14:00:00Z",
+      "status": "TIMED",
+      "home": "Bournemouth",
+      "away": "Fulham"
+    },
+    {
+      "id": "560770",
+      "matchday": 23,
+      "utcDate": "2027-01-31T16:30:00Z",
+      "date": "2027-01-31T16:30:00Z",
+      "status": "TIMED",
+      "home": "Man City",
+      "away": "Arsenal"
+    },
+    {
+      "id": "560763",
+      "matchday": 23,
+      "utcDate": "2027-02-01T20:00:00Z",
+      "date": "2027-02-01T20:00:00Z",
+      "status": "TIMED",
+      "home": "Brentford",
+      "away": "Man United"
     },
     {
       "id": "560772",
