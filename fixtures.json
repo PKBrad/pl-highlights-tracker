@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "competition": "Premier League",
-  "generatedAt": "2026-11-21T07:22:46.872969+00:00",
+  "generatedAt": "2026-11-21T19:26:12.611090+00:00",
   "matches": [
     {
       "id": "560542",
@@ -908,7 +908,7 @@
       "matchday": 11,
       "utcDate": "2026-11-21T12:30:00Z",
       "date": "2026-11-21T12:30:00Z",
-      "status": "TIMED",
+      "status": "FINISHED",
       "home": "Man City",
       "away": "Fulham"
     },
@@ -917,7 +917,7 @@
       "matchday": 11,
       "utcDate": "2026-11-21T15:00:00Z",
       "date": "2026-11-21T15:00:00Z",
-      "status": "TIMED",
+      "status": "FINISHED",
       "home": "Chelsea",
       "away": "Leeds United"
     },
@@ -926,7 +926,7 @@
       "matchday": 11,
       "utcDate": "2026-11-21T15:00:00Z",
       "date": "2026-11-21T15:00:00Z",
-      "status": "TIMED",
+      "status": "FINISHED",
       "home": "Aston Villa",
       "away": "Sunderland"
     },
@@ -935,7 +935,7 @@
       "matchday": 11,
       "utcDate": "2026-11-21T15:00:00Z",
       "date": "2026-11-21T15:00:00Z",
-      "status": "TIMED",
+      "status": "FINISHED",
       "home": "Bournemouth",
       "away": "Nottingham"
     },
@@ -944,7 +944,7 @@
       "matchday": 11,
       "utcDate": "2026-11-21T15:00:00Z",
       "date": "2026-11-21T15:00:00Z",
-      "status": "TIMED",
+      "status": "FINISHED",
       "home": "Tottenham",
       "away": "Ipswich Town"
     },
@@ -953,7 +953,7 @@
       "matchday": 11,
       "utcDate": "2026-11-21T15:00:00Z",
       "date": "2026-11-21T15:00:00Z",
-      "status": "TIMED",
+      "status": "FINISHED",
       "home": "Coventry City",
       "away": "Crystal Palace"
     },
@@ -962,7 +962,7 @@
       "matchday": 11,
       "utcDate": "2026-11-21T17:30:00Z",
       "date": "2026-11-21T17:30:00Z",
-      "status": "TIMED",
+      "status": "IN_PLAY",
       "home": "Newcastle",
       "away": "Arsenal"
     },
