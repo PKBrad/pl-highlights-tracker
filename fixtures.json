@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "competition": "Premier League",
-  "generatedAt": "2026-11-22T07:02:22.964365+00:00",
+  "generatedAt": "2026-11-22T19:48:48.414561+00:00",
   "matches": [
     {
       "id": "560542",
@@ -971,7 +971,7 @@
       "matchday": 11,
       "utcDate": "2026-11-22T14:00:00Z",
       "date": "2026-11-22T14:00:00Z",
-      "status": "TIMED",
+      "status": "FINISHED",
       "home": "Hull City",
       "away": "Brighton Hove"
     },
@@ -980,7 +980,7 @@
       "matchday": 11,
       "utcDate": "2026-11-22T16:30:00Z",
       "date": "2026-11-22T16:30:00Z",
-      "status": "TIMED",
+      "status": "FINISHED",
       "home": "Liverpool",
       "away": "Man United"
     },
