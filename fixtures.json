@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "competition": "Premier League",
-  "generatedAt": "2026-11-27T21:26:56.401124+00:00",
+  "generatedAt": "2026-11-28T07:59:56.878039+00:00",
   "matches": [
     {
       "id": "560542",
@@ -998,7 +998,7 @@
       "matchday": 12,
       "utcDate": "2026-11-27T20:00:00Z",
       "date": "2026-11-27T20:00:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "home": "Nottingham",
       "away": "Chelsea"
     },
